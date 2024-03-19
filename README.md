@@ -12,4 +12,7 @@ Works for 1.7-1.18.2+
 **Search center** - block position of the search center  
 
 # Building
-Clone the repo and run the command from `compile.txt`
+
+```
+gcc -o main ./src/*.c ./src/fortressgenerator/*.c ./src/fortressgenerator/util/*.c ./src/util/*.c 
+```

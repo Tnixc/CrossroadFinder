@@ -1,1 +1,0 @@
-gcc -o main -Wall -Werror -O2 -flto -static -static-libgcc ./src/*.c ./src/fortressgenerator/*.c ./src/fortressgenerator/util/*.c ./src/util/*.c
