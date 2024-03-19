@@ -259,6 +259,12 @@ void processRegion(InputData *inputData, FortressGenerator *fortressGenerator, i
 
     ShapeVariants *shapeVariants = &(SHAPES[inputData->crossroadShape]);
 
+    FILE *logFile = fopen("output.log", "a"); // Open the log file in append mode
+    if (logFile == NULL) {
+        printf("Error opening log file!\n");
+        return;
+    }
+
     for (int heightId = 0; heightId < heightCount; heightId++) {
         int crossroadCount = crossroadCounts[heightId];
         if(crossroadCount <= shapeVariants->offsetsCount) continue;
@@ -286,12 +292,15 @@ void processRegion(InputData *inputData, FortressGenerator *fortressGenerator, i
                     }
                 }
                 if (good >= shapeVariants->offsetsCount) {
-                    printf("Found a good shape at /tp %i %i %i\n", mainBox->minX, mainBox->minY, mainBox->minZ);
+                    // printf("Found a good shape at /tp %i %i %i\n", mainBox->minX, mainBox->minY, mainBox->minZ);
+                    fprintf(logFile, "%i %i\n", mainBox->minX, mainBox->minZ);
+                    fclose(logFile); // Close the file after writing
                     return;
                 }
             }
         }
     }
+   fclose(logFile); // Close the file if no output was written
 }
 
 bool getInputData(InputData *inputData) {
